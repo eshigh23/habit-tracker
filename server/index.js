@@ -15,8 +15,9 @@ app.use(cors({
 
 app.get('/api/status', (req, res) => {
   res.json({
-    status: 'OK',
-    timestamp: new Date().toISOString()
+    status: 'Coming soon',
+    timestamp: new Date().toISOString(),
+    message: 'Stay tuned for updates!'
   });
 });
 

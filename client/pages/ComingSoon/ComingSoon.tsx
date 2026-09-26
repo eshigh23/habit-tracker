@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 type BackendStatus = {
   status: string;
   timestamp: string;
+  message: string;
 };
 
 
@@ -41,6 +42,7 @@ export default function ComingSoon() {
             <div>
                 <h1>{data?.status}</h1>
                 <p>Timestamp: {data?.timestamp}</p>
+                <p>{data?.message}</p>
             </div>
             )}
         </>
