@@ -1,6 +1,7 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router'
 import ComingSoon from '../pages/ComingSoon/ComingSoon'
+import EnterHabits from '../pages/EnterHabits/EnterHabits'
 import './App.css'
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<ComingSoon />} />
+          <Route path="/get-started" element={<EnterHabits />} />
       </Routes>
     </BrowserRouter>
   )

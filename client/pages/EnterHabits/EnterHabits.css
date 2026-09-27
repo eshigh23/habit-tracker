@@ -1,0 +1,15 @@
+
+.enter-habits {
+    /* border: 1px solid red; */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+.enter-habits--input-container {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    /* max-width: 300px; */
+}
