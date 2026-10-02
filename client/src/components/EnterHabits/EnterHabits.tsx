@@ -1,13 +1,17 @@
 import './EnterHabits.css'
 import { useEffect, useState } from "react"
+import type { Habit } from '../../types/types'
 
 
 const habitPlaceholders = ['Gym', 'Read 10 pages', 'Eat breakfast']
 const MAX_HABITS = 5
 
-export default function EnterHabits() {
-    const [habits, setHabits] = useState<string[]>(['', '', ''])
+type EnterHabitsProps = {
+    habits: Habit[],
+    setHabits:  React.Dispatch<React.SetStateAction<Habit[]>>
+}
 
+export default function EnterHabits({ habits, setHabits }: EnterHabitsProps) {
 
     useEffect(() => {
         console.log('habits:', habits)
@@ -18,7 +22,7 @@ export default function EnterHabits() {
         if (habits.length >= MAX_HABITS) {
             return
         }
-        setHabits(prev => [...prev, ''])
+        setHabits(prev => [...prev, { name: '', days: []}])
     }
 
 
@@ -26,16 +30,16 @@ export default function EnterHabits() {
         // if index of item === index, return updated habit
         setHabits(prev => {
             const habitsCopy = [...prev]
-            habitsCopy[index] = value
+            habitsCopy[index].name = value
             return habitsCopy
         })
     }
 
 
     const handleNext = () => {
-        setHabits(prev => {
-            return prev.filter(item => item.trim() !== "" )
-        })
+        const filteredHabits = habits.filter(item => item.name.trim() !== "")
+
+        setHabits(filteredHabits)
 
         // call next page
     }
@@ -51,7 +55,7 @@ export default function EnterHabits() {
                         className="enter-habits--input"
                         key={i}
                         type="text"
-                        value={habits[i]}
+                        value={habits[i].name}
                         placeholder={habitPlaceholders[i] || ''}
                         onChange={(e) => changeHabit(e.target.value, i)}
                     />

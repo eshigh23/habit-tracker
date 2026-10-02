@@ -1,8 +1,8 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router'
-import ComingSoon from '../pages/ComingSoon/ComingSoon'
-import EnterHabits from '../pages/EnterHabits/EnterHabits'
+import GetStarted from './pages/GetStarted/GetStarted'
 import './App.css'
+import ComingSoon from './pages/ComingSoon/ComingSoon'
 
 function App() {
   
@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<ComingSoon />} />
-          <Route path="/get-started" element={<EnterHabits />} />
+          <Route path="/get-started" element={<GetStarted />} />
       </Routes>
     </BrowserRouter>
   )
