@@ -11,17 +11,34 @@ export default function GetStarted() {
         { name: '', days: []}, 
         { name: '', days: []}, 
     ])
+
     const [step, setStep] = useState(0)
+
+    const changeStep = (newStep: number) => {
+        setStep(newStep)
+    }
 
     return (
         <div>
             { step === 0 && (
-                <EnterHabits 
-                    habits={habits} 
-                    setHabits={setHabits}
-                /> 
+                <>
+                    <EnterHabits 
+                        habits={habits} 
+                        setHabits={setHabits}
+                        changeStep={changeStep}
+                    />
+                    
+                </>
             )}
-            { step === 1 && <EnterIntervals /> }
+            { step === 1 && (
+                <>
+                    <EnterIntervals
+                        habits={habits} 
+                        setHabits={setHabits}
+                        changeStep={changeStep}
+                    /> 
+                </>
+            )}
         </div>
     )
     

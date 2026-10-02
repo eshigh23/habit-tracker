@@ -8,10 +8,11 @@ const MAX_HABITS = 5
 
 type EnterHabitsProps = {
     habits: Habit[],
-    setHabits:  React.Dispatch<React.SetStateAction<Habit[]>>
+    setHabits:  React.Dispatch<React.SetStateAction<Habit[]>>,
+    changeStep: (newStep: number) => void
 }
 
-export default function EnterHabits({ habits, setHabits }: EnterHabitsProps) {
+export default function EnterHabits({ habits, setHabits, changeStep }: EnterHabitsProps) {
 
     useEffect(() => {
         console.log('habits:', habits)
@@ -40,8 +41,7 @@ export default function EnterHabits({ habits, setHabits }: EnterHabitsProps) {
         const filteredHabits = habits.filter(item => item.name.trim() !== "")
 
         setHabits(filteredHabits)
-
-        // call next page
+        changeStep(1)
     }
 
 
@@ -55,7 +55,7 @@ export default function EnterHabits({ habits, setHabits }: EnterHabitsProps) {
                         className="enter-habits--input"
                         key={i}
                         type="text"
-                        value={habits[i].name}
+                        value={habit.name}
                         placeholder={habitPlaceholders[i] || ''}
                         onChange={(e) => changeHabit(e.target.value, i)}
                     />
@@ -64,7 +64,6 @@ export default function EnterHabits({ habits, setHabits }: EnterHabitsProps) {
 
             <button onClick={handleAddHabit}>Add habit</button>
             <button onClick={handleNext}>Next</button>
-
         </div>
     )
 }
