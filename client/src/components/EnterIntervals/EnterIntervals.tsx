@@ -1,16 +1,18 @@
 import './EnterIntervals.css'
 import type { Habit } from '../../types/types'
+import { useState } from 'react'
 
 type EnterIntervalsProps = {
     habits: Habit[],
     setHabits:  React.Dispatch<React.SetStateAction<Habit[]>>,
-    changeStep: (newStep: number) => void
+    changeStep: (newStep: number) => void,
+    onSave: (habits: Habit[]) => void
 }
 
 const DAYS_OF_WEEK = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
-export default function EnterIntervals({ habits, setHabits, changeStep }: EnterIntervalsProps) {
-    console.log('habits:', habits)
+export default function EnterIntervals({ habits, setHabits, changeStep, onSave }: EnterIntervalsProps) {
+    const [error, setError] = useState('')
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
 
@@ -31,8 +33,23 @@ export default function EnterIntervals({ habits, setHabits, changeStep }: EnterI
         }))
     }
 
+    const checkAndSaveHabits = () => {
+        setError('')
+
+        // check for habits without days
+        const filtered = habits.filter(habit => habit.days.length === 0)
+
+        if (filtered.length) {
+            setError('Please choose at least one day for each habit')
+            return
+        }
+
+        onSave(habits)
+    }
+
     return(
         <div className="enter-intervals">
+            { error && <p style={{ color: 'red' }}> {error} </p>}
             { habits.map((habit, i) => (
                 <div key={habit.name}>
                     <p>{habit.name}</p>
@@ -48,6 +65,8 @@ export default function EnterIntervals({ habits, setHabits, changeStep }: EnterI
                     ))}
                 </div>
             ))}
+            <button onClick={() => changeStep(0)}>Back</button>
+            <button onClick={checkAndSaveHabits}>Save habits</button>
         </div>
     )
 }

@@ -18,6 +18,10 @@ export default function GetStarted() {
         setStep(newStep)
     }
 
+    const saveHabits = (habits: Habit[]) => {
+        localStorage.setItem('habits', JSON.stringify(habits))
+    }
+
     return (
         <div>
             { step === 0 && (
@@ -36,6 +40,7 @@ export default function GetStarted() {
                         habits={habits} 
                         setHabits={setHabits}
                         changeStep={changeStep}
+                        onSave={saveHabits}
                     /> 
                 </>
             )}

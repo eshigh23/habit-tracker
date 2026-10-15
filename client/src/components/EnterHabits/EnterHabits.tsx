@@ -18,6 +18,8 @@ export default function EnterHabits({ habits, setHabits, changeStep }: EnterHabi
         console.log('habits:', habits)
     }, [habits])
 
+    const [error, setError] = useState('')
+
 
     const handleAddHabit = () => {
         if (habits.length >= MAX_HABITS) {
@@ -39,14 +41,20 @@ export default function EnterHabits({ habits, setHabits, changeStep }: EnterHabi
 
     const handleNext = () => {
         const filteredHabits = habits.filter(item => item.name.trim() !== "")
-
+        if (filteredHabits.length === 0 ) {
+            setError('Please enter at least one habit.')
+            return
+        }
         setHabits(filteredHabits)
         changeStep(1)
     }
 
 
+
+
     return (
         <div className="enter-habits">
+            { error && <p style={{ color: 'red' }}>{ error }</p> }
             <p>What habits would you like to track?</p>
             <p>Enter up to {MAX_HABITS} habits</p>
             <div className="enter-habits--input-container">
