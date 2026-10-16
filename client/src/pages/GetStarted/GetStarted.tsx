@@ -1,0 +1,51 @@
+
+import EnterHabits from "../../components/EnterHabits/EnterHabits"
+import EnterIntervals from "../../components/EnterIntervals/EnterIntervals"
+import { useState } from "react"
+import type { Habit } from "../../types/types"
+
+
+export default function GetStarted() {
+    const [habits, setHabits] = useState<Habit[]>([
+        { name: '', days: []}, // initialize state with three empty objects
+        { name: '', days: []}, 
+        { name: '', days: []}, 
+    ])
+
+    const [step, setStep] = useState(0)
+
+    const changeStep = (newStep: number) => {
+        setStep(newStep)
+    }
+
+    const saveHabits = (habits: Habit[]) => {
+        localStorage.setItem('habits', JSON.stringify(habits))
+    }
+
+    return (
+        <div>
+            <p className="text-3xl font-semibold text-center mb-10">Build your routine</p>
+            { step === 0 && (
+                <>
+                    <EnterHabits 
+                        habits={habits} 
+                        setHabits={setHabits}
+                        changeStep={changeStep}
+                    />
+                    
+                </>
+            )}
+            { step === 1 && (
+                <>
+                    <EnterIntervals
+                        habits={habits} 
+                        setHabits={setHabits}
+                        changeStep={changeStep}
+                        onSave={saveHabits}
+                    /> 
+                </>
+            )}
+        </div>
+    )
+    
+}
