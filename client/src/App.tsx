@@ -6,7 +6,6 @@ import ComingSoon from './pages/ComingSoon/ComingSoon'
 
 function App() {
   
-
   return (
     <div className="p-10 min-h-screen bg-base-100 ">
       <BrowserRouter>

@@ -22,5 +22,5 @@ app.get('/api/status', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Listening on port ${port}`)
+    // console.log(`Listening on port ${port}`)
 })

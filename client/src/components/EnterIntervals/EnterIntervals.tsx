@@ -62,7 +62,7 @@ export default function EnterIntervals({ habits, setHabits, changeStep, onSave }
 
                     <div className="flex flex-wrap gap-4 justify-center">
                         {DAYS_OF_WEEK.map(day => (
-                            <div>
+                            <div key={day}>
                                 <label htmlFor="interval-checkbox" className="text-base" key={day}> {day} </label>
                                 <input
                                     name="interval-checkbox"

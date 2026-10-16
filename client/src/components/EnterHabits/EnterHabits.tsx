@@ -15,9 +15,6 @@ type EnterHabitsProps = {
 
 export default function EnterHabits({ habits, setHabits, changeStep }: EnterHabitsProps) {
 
-    useEffect(() => {
-        console.log('habits:', habits)
-    }, [habits])
 
     const [error, setError] = useState('')
 
