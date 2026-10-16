@@ -1,5 +1,5 @@
 // import './EnterHabits.css'
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import type { Habit } from '../../types/types'
 import { MoveRight, Plus } from "lucide-react"
 
