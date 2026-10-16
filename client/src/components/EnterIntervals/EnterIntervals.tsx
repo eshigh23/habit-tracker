@@ -1,6 +1,7 @@
 import './EnterIntervals.css'
 import type { Habit } from '../../types/types'
 import { useState } from 'react'
+import { MoveLeft, Save } from 'lucide-react'
 
 type EnterIntervalsProps = {
     habits: Habit[],
@@ -48,25 +49,46 @@ export default function EnterIntervals({ habits, setHabits, changeStep, onSave }
     }
 
     return(
-        <div className="enter-intervals">
+        <div className="max-w-lg m-auto flex flex-col gap-8 text-center">
             { error && <p style={{ color: 'red' }}> {error} </p>}
+
+            <div>
+                <p className="text-base font-semibold">Which days will you do each habit?</p>
+            </div>
+
             { habits.map((habit, i) => (
-                <div key={habit.name}>
-                    <p>{habit.name}</p>
-                    {DAYS_OF_WEEK.map(day => (
-                        <label key={day}> {day}:
-                            <input
-                                type={'checkbox'}
-                                checked={habit.days.includes(day)}
-                                value={day}
-                                onChange={(e) => handleChange(e, i)}
-                            />
-                        </label>
-                    ))}
+                <div className="mb-5" key={habit.name}>
+                    <p className="text-lg font-semibold mb-3">{habit.name}</p>
+
+                    <div className="flex flex-wrap gap-4 justify-center">
+                        {DAYS_OF_WEEK.map(day => (
+                            <div>
+                                <label htmlFor="interval-checkbox" className="text-base" key={day}> {day} </label>
+                                <input
+                                    name="interval-checkbox"
+                                    className="checkbox checkbox-sm rounded-sm"
+                                    type={'checkbox'}
+                                    checked={habit.days.includes(day)}
+                                    value={day}
+                                    onChange={(e) => handleChange(e, i)}
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             ))}
-            <button onClick={() => changeStep(0)}>Back</button>
-            <button onClick={checkAndSaveHabits}>Save habits</button>
+
+            <div className="flex gap-3">
+                <button className="btn btn-outline flex-1" onClick={() => changeStep(0)}>
+                    <MoveLeft size={15} />
+                    Back
+                </button>
+                <button className="btn btn-primary flex-1" onClick={checkAndSaveHabits}>
+                    Save habits
+                    <Save size={15} />
+                </button>
+            </div>
+            
         </div>
     )
 }

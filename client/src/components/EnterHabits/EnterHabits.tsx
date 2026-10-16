@@ -1,6 +1,7 @@
-import './EnterHabits.css'
+// import './EnterHabits.css'
 import { useEffect, useState } from "react"
 import type { Habit } from '../../types/types'
+import { MoveRight, Plus } from "lucide-react"
 
 
 const habitPlaceholders = ['Gym', 'Read 10 pages', 'Eat breakfast']
@@ -53,14 +54,19 @@ export default function EnterHabits({ habits, setHabits, changeStep }: EnterHabi
 
 
     return (
-        <div className="enter-habits">
+        <div className="max-w-lg m-auto flex flex-col gap-8 text-center">
             { error && <p style={{ color: 'red' }}>{ error }</p> }
-            <p>What habits would you like to track?</p>
-            <p>Enter up to {MAX_HABITS} habits</p>
-            <div className="enter-habits--input-container">
+
+            <div className="flex flex-col gap-3">
+                <p className="text-base font-semibold">What habits would you like to track?</p>
+                <p className="text-base">Enter up to {MAX_HABITS} habits</p>
+            </div>
+
+            <div className="flex flex-col gap-3">
                 { habits.map((habit, i) => (
                     <input
-                        className="enter-habits--input"
+                        // className="enter-habits--input"
+                        className="input w-full"
                         key={i}
                         type="text"
                         value={habit.name}
@@ -68,10 +74,20 @@ export default function EnterHabits({ habits, setHabits, changeStep }: EnterHabi
                         onChange={(e) => changeHabit(e.target.value, i)}
                     />
                 ))}
-            </div>
 
-            <button onClick={handleAddHabit}>Add habit</button>
-            <button onClick={handleNext}>Next</button>
+            </div>
+            
+            <div className="flex gap-3">
+                <button className="btn btn-outline flex-1" onClick={handleAddHabit}>
+                    <Plus size={15}/>
+                    Add habit
+                </button>
+                <button className="btn btn-neutral flex-1" onClick={handleNext}>
+                    Next
+                    <MoveRight size={15} />
+                </button>
+            </div>
+            
         </div>
     )
 }

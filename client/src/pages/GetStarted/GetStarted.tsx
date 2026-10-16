@@ -24,6 +24,7 @@ export default function GetStarted() {
 
     return (
         <div>
+            <p className="text-3xl font-semibold text-center mb-10">Build your routine</p>
             { step === 0 && (
                 <>
                     <EnterHabits 
